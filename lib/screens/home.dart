@@ -113,7 +113,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       }
     });
   }
-  //code this line
+  //code
   getCartCount()async {
     var res = await CartRepository().getCartCount();
     widget.counter.controller.sink.add(res.count);
