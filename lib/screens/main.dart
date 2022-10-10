@@ -10,6 +10,7 @@ import 'package:active_ecommerce_flutter/screens/category_list.dart';
 import 'package:active_ecommerce_flutter/screens/home.dart';
 import 'package:active_ecommerce_flutter/screens/login.dart';
 import 'package:active_ecommerce_flutter/screens/profile.dart';
+import 'package:active_ecommerce_flutter/screens/qr_code_scanner.dart';
 import 'package:active_ecommerce_flutter/screens/qr_scanner.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
@@ -122,7 +123,7 @@ class _MainState extends State<Main> {
               color: Color.fromRGBO(153, 153, 153, 1),
             ),
             onPressed: () {
-              Navigator.push(context,MaterialPageRoute(builder:(Context) =>  QRPay() ));
+              Navigator.push(context,MaterialPageRoute(builder:(Context) =>  QRViewExample() ));
             },
           ),
           floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

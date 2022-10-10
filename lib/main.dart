@@ -10,7 +10,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:active_ecommerce_flutter/my_theme.dart';
 import 'package:active_ecommerce_flutter/screens/splash.dart';
 import 'package:shared_value/shared_value.dart';
-import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
 import 'dart:async';
 import 'app_config.dart';
 import 'package:active_ecommerce_flutter/services/push_notification_service.dart';

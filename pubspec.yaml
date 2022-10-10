@@ -87,6 +87,8 @@ dependencies:
   firebase_core: ^1.20.0
   flutter_local_notifications: ^9.7.0
   qr_code_scanner: ^1.0.1
+  snapping_sheet: ^3.1.0
+
 
 
 dev_dependencies:
