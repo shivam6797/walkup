@@ -62,53 +62,58 @@ class DataTableWidget extends StatelessWidget {
 //  DataTableWidget(this.listOfColumns);     // Getting the data from outside, on initialization
   @override
   Widget build(BuildContext context) {
-    return Container(
-      // height: MediaQuery.of(context).size.height / 1.0,
-      decoration: BoxDecoration(
-        border: Border.all(width: 0.6, color: Colors.grey),
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
-      ),
+    return SingleChildScrollView(
+      physics: BouncingScrollPhysics(),
+      scrollDirection: Axis.vertical,
+      reverse: true,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Padding(
+            padding: const EdgeInsets.only(top:10,left:20),
+            child: const Text("Order Summary",style:TextStyle(color:Colors.black,fontSize:16,fontWeight:FontWeight.bold)),
+          ),
           Container(
-            padding: const EdgeInsets.only(left:10,top:10),
-            width: MediaQuery.of(context).size.width,
-            color: Colors.grey[200],
-            child: const Text("Order Summary",style:TextStyle(color:Colors.black,fontSize:16,fontWeight:FontWeight.bold))),
-          DataTable(
-            dataRowHeight:45,
-            headingRowHeight:50,
-            columnSpacing:11,
-            horizontalMargin:10,
-            decoration: BoxDecoration(
-                color: Colors.grey[700],
-                // border: Border.all(color: Colors.black, width: 0.5),
-                ),
-            headingTextStyle:
-                const TextStyle(color: Colors.black87, fontWeight: FontWeight.w600),
-            columns:const [
-              DataColumn(label: Text('Items')),
-              DataColumn(label: Text('Variant')),
-              DataColumn(label: Text('Qty')),
-              DataColumn(label: Text('Price')),
-              DataColumn(label: Text('Total')),
-     
-            ],
-            rows:
-                listOfColumns // Loops through dataColumnText, each iteration assigning the value to element
-                    .map(
-                      ((element) => DataRow(
-                            cells: <DataCell>[
-                              DataCell(Text(element["Items"].toString())),
-                              DataCell(Text(element["Variant"].toString())),
-                              DataCell(Text(element["Qty"].toString())),
-                              DataCell(Text(element["Price"].toString())),
-                              DataCell(Text(element["Total"].toString())),
-                            ],
-                          )),
-                    )
-                    .toList(),
+            height: MediaQuery.of(context).size.height/2.0,
+            child: SingleChildScrollView(
+           scrollDirection: Axis.vertical,
+             physics: BouncingScrollPhysics(),
+             reverse: true,
+              child: DataTable(
+                dataRowHeight:45,
+                headingRowHeight:50,
+                columnSpacing:11,
+                horizontalMargin:10,
+                decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    // border: Border.all(color: Colors.black, width: 0.5),
+                    ),
+                headingTextStyle:
+                    const TextStyle(color: Colors.black87, fontWeight: FontWeight.w600),
+                columns:const [
+                  DataColumn(label: Text('Items')),
+                  DataColumn(label: Text('Variant')),
+                  DataColumn(label: Text('Qty')),
+                  DataColumn(label: Text('Price')),
+                  DataColumn(label: Text('Total')),
+                 
+                ],
+                rows:
+                    listOfColumns // Loops through dataColumnText, each iteration assigning the value to element
+                        .map(
+                          ((element) => DataRow(
+                                cells: <DataCell>[
+                                  DataCell(Text(element["Items"].toString())),
+                                  DataCell(Text(element["Variant"].toString())),
+                                  DataCell(Text(element["Qty"].toString())),
+                                  DataCell(Text(element["Price"].toString())),
+                                  DataCell(Text(element["Total"].toString())),
+                                ],
+                              )),
+                        )
+                        .toList(),
+              ),
+            ),
           ),
         ],
       ),

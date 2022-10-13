@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_required_positional_param
+
 import 'package:active_ecommerce_flutter/app_config.dart';
 import 'package:http/http.dart' as http;
 import 'package:active_ecommerce_flutter/data_model/login_response.dart';
@@ -14,9 +16,9 @@ import 'package:active_ecommerce_flutter/helpers/shared_value_helper.dart';
 
 class AuthRepository {
   Future<LoginResponse> getLoginResponse(
-      @required String email, @required String password) async {
+      @required String phone, @required String password) async {
     var post_body = jsonEncode({
-      "email": "${email}",
+      "email": "${phone}",
       "password": "$password",
       "identity_matrix": AppConfig.purchase_code
     });
@@ -36,9 +38,9 @@ class AuthRepository {
   Future<LoginResponse> getSocialLoginResponse(@required String social_provider,
       @required String name, @required String email, @required String provider,
       {access_token = ""}) async {
-    email = email == ("null") ? "" : email;
+      email = email == ("null") ? "" : email;
 
-    var post_body = jsonEncode(
+     var post_body = jsonEncode(
         {"name": "${name}", "email": email, "provider": "$provider","social_provider":"$social_provider","access_token":"$access_token"});
 
     Uri url = Uri.parse("${AppConfig.BASE_URL}/auth/social-login");
@@ -70,13 +72,13 @@ class AuthRepository {
 
   Future<SignupResponse> getSignupResponse(
       @required String name,
-      @required String email_or_phone,
+      @required String phone,
       @required String password,
       @required String passowrd_confirmation,
       @required String register_by) async {
     var post_body = jsonEncode({
       "name": "$name",
-      "email_or_phone": "${email_or_phone}",
+      "email_or_phone": "$phone",
       "password": "$password",
       "password_confirmation": "${passowrd_confirmation}",
       "register_by": "$register_by"

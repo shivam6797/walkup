@@ -389,18 +389,63 @@ class _InputWidgetView
           Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              CustomSelectorButton(
-                country: state.country,
-                countries: state.countries,
-                onCountryChanged: state.onCountryChanged,
-                selectorConfig: widget.selectorConfig,
-                selectorTextStyle: widget.selectorTextStyle,
-                searchBoxDecoration: widget.searchBoxDecoration,
-                locale: state.locale,
-                isEnabled: widget.isEnabled,
-                autoFocusSearchField: widget.autoFocusSearch,
-                isScrollControlled: widget.countrySelectorScrollControlled,
+             Container(
+            height: 36,
+            decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(
+                    color: MyTheme.textfield_grey,
+                    width: .5
+                ),
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(5.0),
+                    bottomLeft: Radius.circular(5.0))),
+            child: FlatButton(
+              key: Key(TestHelper.DropdownButtonKeyValue),
+              padding: EdgeInsets.zero,
+              minWidth: 0,
+              color: Colors.white,
+              shape: RoundedRectangleBorder(
+                  borderRadius: const BorderRadius.only(
+                topLeft: const Radius.circular(5.0),
+                bottomLeft: const Radius.circular(5.0),
+              )),
+              // onPressed: countries.isNotEmpty &&
+              //         countries.length > 1 &&
+              //         isEnabled
+              //     ? () async {
+              //         Country selected;
+              //         if (selectorConfig.selectorType ==
+              //             PhoneInputSelectorType.BOTTOM_SHEET) {
+              //           selected = await showCountrySelectorBottomSheet(
+              //               context, countries);
+              //         } else {
+              //           selected =
+              //               await showCountrySelectorDialog(context, countries);
+              //         }
+
+              //         if (selected != null) {
+              //           onCountryChanged(selected);
+              //         }
+              //       }
+              //     : null,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 10.0),
+                child: Row(
+                  mainAxisAlignment:MainAxisAlignment.center,
+                  children: [
+                    Image.asset("assets/indian_flag.png",width:30,height:40,fit:BoxFit.contain,),
+                    SizedBox(width:10,),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text("+91",style:TextStyle(color:MyTheme.grey_153,fontSize:15,fontWeight:FontWeight.w500),),
+                    )
+                  ],
+                )
               ),
+            ),
+          ),
+              
               SizedBox(
                 height: state.selectorButtonBottomPadding,
               ),

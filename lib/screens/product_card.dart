@@ -41,13 +41,13 @@ class _ProductCardState extends State<ProductCard> {
       },
       child: Card(
         
-        margin: EdgeInsets.all(0),
+        margin: EdgeInsets.only(right:5),
         //clipBehavior: Clip.antiAliasWithSaveLayer,
         shape: RoundedRectangleBorder(
           // side: new BorderSide(color:Colors.grey, width:0.5),
-          borderRadius: BorderRadius.circular(0.0),
+          borderRadius: BorderRadius.circular(10.0),
         ),
-        elevation: 2.0,
+        elevation: 3.0,
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -128,7 +128,7 @@ class _ProductCardState extends State<ProductCard> {
                         ),
                              Container(
                                height: 25,
-                               width: 70,
+                               width: 60,
                                decoration: BoxDecoration(
                                  borderRadius:BorderRadius.circular(10),
                                  color: Colors.green

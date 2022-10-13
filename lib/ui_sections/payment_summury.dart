@@ -105,7 +105,7 @@ class _PaymentSummuryScreenState extends State<PaymentSummuryScreen> {
           ],
         ),
         body: ListView(
-          physics: BouncingScrollPhysics(),
+          physics: NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           children: [
             DataTableWidget(),

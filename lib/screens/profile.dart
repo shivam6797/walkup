@@ -1204,7 +1204,6 @@ class _ProfileState extends State<Profile> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
-
             children: [
               Text(
                 "${user_name.$}",

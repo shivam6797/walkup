@@ -5,6 +5,7 @@ import 'package:active_ecommerce_flutter/repositories/cart_repository.dart';
 import 'package:active_ecommerce_flutter/screens/category_wise.dart';
 import 'package:active_ecommerce_flutter/screens/filter.dart';
 import 'package:active_ecommerce_flutter/screens/flash_deal_list.dart';
+import 'package:active_ecommerce_flutter/screens/qr_code_scanner.dart';
 import 'package:active_ecommerce_flutter/screens/todays_deal_products.dart';
 import 'package:active_ecommerce_flutter/screens/top_selling_products.dart';
 import 'package:active_ecommerce_flutter/screens/category_products.dart';
@@ -28,8 +29,12 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class Home extends StatefulWidget {
-
-  Home({Key key, this.title, this.show_back_button = false, go_back = true, this.counter})
+  Home(
+      {Key key,
+      this.title,
+      this.show_back_button = false,
+      go_back = true,
+      this.counter})
       : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
@@ -113,15 +118,14 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       }
     });
   }
+
   //code this line
-  getCartCount()async {
+  getCartCount() async {
     var res = await CartRepository().getCartCount();
     widget.counter.controller.sink.add(res.count);
   }
 
-
   fetchAll() {
-
     getCartCount();
 
     fetchCarouselImages();
@@ -270,10 +274,12 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           child: Scaffold(
               key: _scaffoldKey,
               appBar: PreferredSize(
-                preferredSize: Size.fromHeight(76),
-                child: buildAppBar(statusBarHeight, context),
+                preferredSize: Size.fromHeight(50),
+                child: buildHomeAppBar(context),
+                
+                // buildAppBar(statusBarHeight, context),
               ),
-              //drawer: MainDrawer(),
+              drawer: MainDrawer(),
               body: Stack(
                 children: [
                   RefreshIndicator(
@@ -334,22 +340,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                             //       )
                             //     : Container(),
                             // buildHomeCarouselSlider(context),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(
-                                18.0,
-                                0.0,
-                                18.0,
-                                0.0,
-                              ),
-                              child: Column(
-                                children: [
-                                  buildHomeMenuRow1(context),
-                                  SizedBox(height:10,),
-                                  buildHomeMenuRow1(context)
-                                ],
-                              ),
-                            ),
-                            // buildHomeBannerOne(context),
                             // Padding(
                             //   padding: const EdgeInsets.fromLTRB(
                             //     18.0,
@@ -357,8 +347,44 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                             //     18.0,
                             //     0.0,
                             //   ),
-                            //   child: buildHomeMenuRow2(context),
+                            //   child: Column(
+                            //     children: [
+                            //       buildHomeMenuRow1(context),
+                            //       SizedBox(height:10,),
+                            //       buildHomeMenuRow1(context)
+                            //     ],
+                            //   ),
                             // ),
+                            // buildHomeBannerOne(context),
+                            // Container(
+                            //   height: 50,
+                            //   width: 50,
+                            //   alignment: Alignment.center,
+                            //   color: MyTheme.white,
+                            //   child: Image.asset(
+                            //     "assets/splash_screen_logo.png",
+                            //     height: 50,
+                            //     width: 50,
+                            //     fit: BoxFit.contain,
+                            //   ),
+                            // ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(
+                                18.0,
+                                8.0,
+                                18.0,
+                                0.0,
+                              ),
+                              child: Column(
+                                children: [
+                                  buildHomeMenuRow2(context),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  buildHomeMenuRow3(context),
+                                ],
+                              ),
+                            ),
                           ]),
                         ),
                         // SliverList(
@@ -483,7 +509,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     );
   }
 
-  Widget  buildHomeAllProducts(context) {
+  Widget buildHomeAllProducts(context) {
     if (_isAllProductInitial && _allProductList.length == 0) {
       return SingleChildScrollView(
           child: ShimmerHelper().buildProductGridShimmer(
@@ -507,12 +533,12 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
         itemBuilder: (context, index) {
           // 3
           return ProductCard(
-              id: _allProductList[index].id,
-              image: _allProductList[index].thumbnail_image,
-              name: _allProductList[index].name,
-              main_price: _allProductList[index].main_price,
-              stroked_price: _allProductList[index].stroked_price,
-              has_discount: _allProductList[index].has_discount,
+            id: _allProductList[index].id,
+            image: _allProductList[index].thumbnail_image,
+            name: _allProductList[index].name,
+            main_price: _allProductList[index].main_price,
+            stroked_price: _allProductList[index].stroked_price,
+            has_discount: _allProductList[index].has_discount,
             discount: _allProductList[index].discount,
           );
         },
@@ -542,12 +568,12 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           physics: NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             return ProductCard(
-                id: _allProductList[index].id,
-                image: _allProductList[index].thumbnail_image,
-                name: _allProductList[index].name,
-                main_price: _allProductList[index].main_price,
-                stroked_price: _allProductList[index].stroked_price,
-                has_discount: _allProductList[index].has_discount,
+              id: _allProductList[index].id,
+              image: _allProductList[index].thumbnail_image,
+              name: _allProductList[index].name,
+              main_price: _allProductList[index].main_price,
+              stroked_price: _allProductList[index].stroked_price,
+              has_discount: _allProductList[index].has_discount,
               discount: _allProductList[index].discount,
             );
           });
@@ -560,7 +586,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     }
   }
 
-  Widget  buildHomeFeaturedCategories(context) {
+  Widget buildHomeFeaturedCategories(context) {
     if (_isCategoryInitial && _featuredCategoryList.length == 0) {
       return ShimmerHelper().buildHorizontalGridShimmerWithAxisCount(
           crossAxisSpacing: 14.0,
@@ -724,7 +750,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     }
   }
 
-Widget  buildHomeMenuRow1(BuildContext context) {
+  Widget buildHomeMenuRow1(BuildContext context) {
     return Row(
       children: [
         Flexible(
@@ -739,14 +765,14 @@ Widget  buildHomeMenuRow1(BuildContext context) {
             child: Container(
               height: 50,
               decoration: BoxDecorations.buildBoxDecoration_1(),
-              child:  Center(
-                    child: Text("Pack", textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: Color.fromRGBO(132, 132, 132, 1),
-                            fontWeight: FontWeight.w300)),
-                  ),
-              
-              
+              child: Center(
+                child: Text("Pack",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: Color.fromRGBO(132, 132, 132, 1),
+                        fontWeight: FontWeight.w300)),
+              ),
+
               // Column(
               //   crossAxisAlignment: CrossAxisAlignment.center,
               //   children: [
@@ -762,7 +788,7 @@ Widget  buildHomeMenuRow1(BuildContext context) {
               //     //     style: TextStyle(
               //     //         color: Color.fromRGBO(132, 132, 132, 1),
               //     //         fontWeight: FontWeight.w300)),
-                 
+
               //   ],
               // ),
             ),
@@ -779,41 +805,71 @@ Widget  buildHomeMenuRow1(BuildContext context) {
               }));
             },
             child: Container(
-              height: 50,
-              decoration: BoxDecorations.buildBoxDecoration_1(),
-              child:  Center(
-                child: Text("Take Away", textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: Color.fromRGBO(132, 132, 132, 1),
-                            fontWeight: FontWeight.w300)),
-              )
-              
-              
-              // Column(
-              //   children: [
-              //     Padding(
-              //       padding: const EdgeInsets.all(16.0),
-              //       child: Container(
-              //           height: 20,
-              //           width: 20,
-              //           child: Image.asset("assets/flash_deal.png")),
-              //     ),
-              //     Text(AppLocalizations.of(context).home_screen_flash_deal,
-              //         textAlign: TextAlign.center,
-              //         style: TextStyle(
-              //             color: Color.fromRGBO(132, 132, 132, 1),
-              //             fontWeight: FontWeight.w300)),
-                 
-              //   ],
-              // ),
-            ),
+                height: 50,
+                decoration: BoxDecorations.buildBoxDecoration_1(),
+                child: Center(
+                  child: Text("Take Away",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Color.fromRGBO(132, 132, 132, 1),
+                          fontWeight: FontWeight.w300)),
+                )
+
+                // Column(
+                //   children: [
+                //     Padding(
+                //       padding: const EdgeInsets.all(16.0),
+                //       child: Container(
+                //           height: 20,
+                //           width: 20,
+                //           child: Image.asset("assets/flash_deal.png")),
+                //     ),
+                //     Text(AppLocalizations.of(context).home_screen_flash_deal,
+                //         textAlign: TextAlign.center,
+                //         style: TextStyle(
+                //             color: Color.fromRGBO(132, 132, 132, 1),
+                //             fontWeight: FontWeight.w300)),
+
+                //   ],
+                // ),
+                ),
           ),
         )
       ],
     );
   }
 
- Widget buildHomeMenuRow2(BuildContext context) {
+
+ Widget buildGuidPage(BuildContext context){
+  return Flexible(
+          flex: 1,
+          fit: FlexFit.tight,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return CategoryWiseScreen();
+              }));
+            },
+            child: Container(
+              height: 50,
+              decoration: BoxDecorations.buildBoxDecoration_1(),
+              child: Center(
+                child: Text("Pack",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: Color.fromRGBO(132, 132, 132, 1),
+                        fontWeight: FontWeight.w300)),
+              ),
+
+              
+            ),
+          ),
+        );
+ }
+
+
+
+  Widget buildHomeMenuRow2(BuildContext context) {
     return Row(
       children: [
         Flexible(
@@ -822,34 +878,41 @@ Widget  buildHomeMenuRow1(BuildContext context) {
           child: GestureDetector(
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return CategoryList(
-                  is_top_category: true,
-                );
+                return QRViewExample();
+
+                // CategoryList(
+                //   is_top_category: true,
+                // );
               }));
             },
             child: Container(
-              height: 90,
-              width: MediaQuery.of(context).size.width / 3 - 4,
-              decoration: BoxDecorations.buildBoxDecoration_1(),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Container(
-                        height: 20,
-                        width: 20,
-                        child: Image.asset("assets/top_categories.png")),
-                  ),
-                  Text(
-                    AppLocalizations.of(context).home_screen_top_categories,
+                height: 50,
+                width: MediaQuery.of(context).size.width / 3 - 4,
+                decoration: BoxDecorations.buildBoxDecoration_1(),
+                child: Center(
+                  child: Text(
+                    // AppLocalizations.of(context).home_screen_top_categories,
+                    "Self CheckOut",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: Color.fromRGBO(132, 132, 132, 1),
                         fontWeight: FontWeight.w300),
-                  )
-                ],
-              ),
-            ),
+                  ),
+                )
+
+                // Column(
+                //   children: [
+                //     // Padding(
+                //     //   padding: const EdgeInsets.all(16.0),
+                //     //   child: Container(
+                //     //       height: 20,
+                //     //       width: 20,
+                //     //       child: Image.asset("assets/top_categories.png")),
+                //     // ),
+
+                //   ],
+                // ),
+                ),
           ),
         ),
         SizedBox(
@@ -861,74 +924,211 @@ Widget  buildHomeMenuRow1(BuildContext context) {
           child: GestureDetector(
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return Filter(
-                  selected_filter: "brands",
-                );
+                return QRViewExample();
+                // Filter(
+                //   selected_filter: "brands",
+                // );
               }));
             },
             child: Container(
-              height: 90,
+              height: 50,
               width: MediaQuery.of(context).size.width / 3 - 4,
               decoration: BoxDecorations.buildBoxDecoration_1(),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Container(
-                        height: 20,
-                        width: 20,
-                        child: Image.asset("assets/brands.png")),
-                  ),
-                  Text(AppLocalizations.of(context).home_screen_brands,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Color.fromRGBO(132, 132, 132, 1),
-                          fontWeight: FontWeight.w300)),
-                ],
+              child: Center(
+                child: Text(
+                    // AppLocalizations.of(context).home_screen_brands,
+                    "Pack For Me",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: Color.fromRGBO(132, 132, 132, 1),
+                        fontWeight: FontWeight.w300)),
               ),
+
+              //  Column(
+              //   children: [
+              //     Padding(
+              //       padding: const EdgeInsets.all(16.0),
+              //       child: Container(
+              //           height: 20,
+              //           width: 20,
+              //           child: Image.asset("assets/brands.png")),
+              //     ),
+
+              //   ],
+              // ),
             ),
           ),
         ),
-        SizedBox(
-          width: 14.0,
-        ),
-        Flexible(
-          flex: 1,
-          fit: FlexFit.tight,
-          child: GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return TopSellingProducts();
-              }));
-            },
-            child: Container(
-              height: 90,
-              width: MediaQuery.of(context).size.width / 3 - 4,
-              decoration: BoxDecorations.buildBoxDecoration_1(),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Container(
-                        height: 20,
-                        width: 20,
-                        child: Image.asset("assets/top_sellers.png")),
-                  ),
-                  Text(AppLocalizations.of(context).home_screen_top_sellers,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Color.fromRGBO(132, 132, 132, 1),
-                          fontWeight: FontWeight.w300)),
-                ],
-              ),
-            ),
-          ),
-        ),
+        // SizedBox(
+        //   width: 14.0,
+        // ),
+        // Flexible(
+        //   flex: 1,
+        //   fit: FlexFit.tight,
+        //   child: GestureDetector(
+        //     onTap: () {
+        //       Navigator.push(context, MaterialPageRoute(builder: (context) {
+        //         return TopSellingProducts();
+        //       }));
+        //     },
+        //     child: Container(
+        //       height: 90,
+        //       width: MediaQuery.of(context).size.width / 3 - 4,
+        //       decoration: BoxDecorations.buildBoxDecoration_1(),
+        //       child: Column(
+        //         children: [
+        //           Padding(
+        //             padding: const EdgeInsets.all(16.0),
+        //             child: Container(
+        //                 height: 20,
+        //                 width: 20,
+        //                 child: Image.asset("assets/top_sellers.png")),
+        //           ),
+        //           Text(AppLocalizations.of(context).home_screen_top_sellers,
+        //               textAlign: TextAlign.center,
+        //               style: TextStyle(
+        //                   color: Color.fromRGBO(132, 132, 132, 1),
+        //                   fontWeight: FontWeight.w300)),
+        //         ],
+        //       ),
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }
 
-Widget  buildHomeCarouselSlider(context) {
+  Widget buildHomeMenuRow3(BuildContext context) {
+    return Row(
+      children: [
+        Flexible(
+          flex: 1,
+          fit: FlexFit.tight,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return CategoryWiseScreen();
+
+                // CategoryList(
+                //   is_top_category: true,
+                // );
+              }));
+            },
+            child: Container(
+                height: 50,
+                width: MediaQuery.of(context).size.width / 3 - 4,
+                decoration: BoxDecorations.buildBoxDecoration_1(),
+                child: Center(
+                  child: Text(
+                    // AppLocalizations.of(context).home_screen_top_categories,
+                    "Self Pickup",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: Color.fromRGBO(132, 132, 132, 1),
+                        fontWeight: FontWeight.w300),
+                  ),
+                )
+
+                // Column(
+                //   children: [
+                //     // Padding(
+                //     //   padding: const EdgeInsets.all(16.0),
+                //     //   child: Container(
+                //     //       height: 20,
+                //     //       width: 20,
+                //     //       child: Image.asset("assets/top_categories.png")),
+                //     // ),
+
+                //   ],
+                // ),
+                ),
+          ),
+        ),
+        SizedBox(
+          width: 14.0,
+        ),
+        Flexible(
+          flex: 1,
+          fit: FlexFit.tight,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return CategoryWiseScreen();
+
+                // Filter(
+                //   selected_filter: "brands",
+                // );
+              }));
+            },
+            child: Container(
+              height: 50,
+              width: MediaQuery.of(context).size.width / 3 - 4,
+              decoration: BoxDecorations.buildBoxDecoration_1(),
+              child: Center(
+                child: Text(
+                    // AppLocalizations.of(context).home_screen_brands,
+                    "Online Delivery",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: Color.fromRGBO(132, 132, 132, 1),
+                        fontWeight: FontWeight.w300)),
+              ),
+
+              //  Column(
+              //   children: [
+              //     Padding(
+              //       padding: const EdgeInsets.all(16.0),
+              //       child: Container(
+              //           height: 20,
+              //           width: 20,
+              //           child: Image.asset("assets/brands.png")),
+              //     ),
+
+              //   ],
+              // ),
+            ),
+          ),
+        ),
+        // SizedBox(
+        //   width: 14.0,
+        // ),
+        // Flexible(
+        //   flex: 1,
+        //   fit: FlexFit.tight,
+        //   child: GestureDetector(
+        //     onTap: () {
+        //       Navigator.push(context, MaterialPageRoute(builder: (context) {
+        //         return TopSellingProducts();
+        //       }));
+        //     },
+        //     child: Container(
+        //       height: 90,
+        //       width: MediaQuery.of(context).size.width / 3 - 4,
+        //       decoration: BoxDecorations.buildBoxDecoration_1(),
+        //       child: Column(
+        //         children: [
+        //           Padding(
+        //             padding: const EdgeInsets.all(16.0),
+        //             child: Container(
+        //                 height: 20,
+        //                 width: 20,
+        //                 child: Image.asset("assets/top_sellers.png")),
+        //           ),
+        //           Text(AppLocalizations.of(context).home_screen_top_sellers,
+        //               textAlign: TextAlign.center,
+        //               style: TextStyle(
+        //                   color: Color.fromRGBO(132, 132, 132, 1),
+        //                   fontWeight: FontWeight.w300)),
+        //         ],
+        //       ),
+        //     ),
+        //   ),
+        // ),
+      ],
+    );
+  }
+
+  Widget buildHomeCarouselSlider(context) {
     if (_isCarouselInitial && _carouselImageList.length == 0) {
       return Padding(
           padding:
@@ -962,7 +1162,7 @@ Widget  buildHomeCarouselSlider(context) {
                 child: Stack(
                   children: <Widget>[
                     Container(
-                      //color: Colors.amber,
+                        //color: Colors.amber,
                         width: double.infinity,
                         decoration: BoxDecorations.buildBoxDecoration_1(),
                         child: ClipRRect(
@@ -1017,7 +1217,7 @@ Widget  buildHomeCarouselSlider(context) {
     }
   }
 
-Widget  buildHomeBannerOne(context) {
+  Widget buildHomeBannerOne(context) {
     if (_isBannerOneInitial && _bannerOneImageList.length == 0) {
       return Padding(
           padding:
@@ -1049,7 +1249,7 @@ Widget  buildHomeBannerOne(context) {
                   padding: const EdgeInsets.only(
                       left: 9.0, right: 9, top: 20.0, bottom: 20),
                   child: Container(
-                    //color: Colors.amber,
+                      //color: Colors.amber,
                       width: double.infinity,
                       decoration: BoxDecorations.buildBoxDecoration_1(),
                       child: ClipRRect(
@@ -1081,7 +1281,7 @@ Widget  buildHomeBannerOne(context) {
     }
   }
 
- Widget buildHomeBannerTwo(context) {
+  Widget buildHomeBannerTwo(context) {
     if (_isBannerTwoInitial && _bannerTwoImageList.length == 0) {
       return Padding(
           padding:
@@ -1117,7 +1317,6 @@ Widget  buildHomeBannerOne(context) {
                       left: 9.0, right: 9, top: 20.0, bottom: 10),
                   child: Container(
                       width: double.infinity,
-
                       decoration: BoxDecorations.buildBoxDecoration_1(),
                       child: ClipRRect(
                           borderRadius: BorderRadius.all(Radius.circular(6)),
@@ -1159,7 +1358,7 @@ Widget  buildHomeBannerOne(context) {
           // padding:
           //     const EdgeInsets.only(top: 40.0, bottom: 22, left: 18, right: 18),
           padding:
-          const EdgeInsets.only(top: 20.0, bottom: 22, left: 18, right: 18),
+              const EdgeInsets.only(top: 20.0, bottom: 22, left: 18, right: 18),
           child: GestureDetector(
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -1167,6 +1366,27 @@ Widget  buildHomeBannerOne(context) {
                 }));
               },
               child: buildHomeSearchBox(context))),
+    );
+  }
+
+  AppBar buildHomeAppBar(BuildContext context) {
+    return AppBar(
+      backgroundColor: MyTheme.white,
+      elevation: 0,
+      titleSpacing: 0,
+      centerTitle: true,
+      title: Container(
+        height: 50,
+        width: 50,
+        alignment: Alignment.center,
+        color: MyTheme.white,
+        child: Image.asset(
+          "assets/splash_screen_logo.png",
+          height: 50,
+          width: 50,
+          fit: BoxFit.contain,
+        ),
+      ),
     );
   }
 
@@ -1194,7 +1414,6 @@ Widget  buildHomeBannerOne(context) {
         ),
       ),
     );
-
   }
 
   Container buildProductLoadingContainer() {

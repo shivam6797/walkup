@@ -20,7 +20,7 @@ class _CategoryWiseScreenState extends State<CategoryWiseScreen> {
         backgroundColor: Colors.white,
         appBar: buildAppBar(context),
         body: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
+          physics: NeverScrollableScrollPhysics(),
           child: Container(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
@@ -32,15 +32,19 @@ class _CategoryWiseScreenState extends State<CategoryWiseScreen> {
                 buildCategory(),
                 Container(
                   margin: EdgeInsets.symmetric(vertical:5),
-                  height: MediaQuery.of(context).size.height / 1.10,
-                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height/1.10,
+                  // width: MediaQuery.of(context).size.width,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                          width: MediaQuery.of(context).size.width / 4.0,
-                          // height: MediaQuery.of(context).size.height,
-                          child: buildCategoryList()),
+                      Card(
+                        elevation: 10,
+                        child: Container(
+                            width: MediaQuery.of(context).size.width / 4.5,
+                            color: Colors.white,
+                            child: buildCategoryList()),
+                      ),
                       buildProductList(),
                       // Align(
                       //   alignment: Alignment.bottomCenter,
@@ -58,7 +62,7 @@ class _CategoryWiseScreenState extends State<CategoryWiseScreen> {
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
         backgroundColor: MyTheme.white,
-        elevation: 2,
+        elevation: 1,
         titleSpacing: 0,
         leading: Builder(
           builder: (context) => IconButton(
@@ -92,6 +96,8 @@ class _CategoryWiseScreenState extends State<CategoryWiseScreen> {
         ));
   }
 
+   
+
   buildProductList() {
     return Container(
       width: MediaQuery.of(context).size.width / 1.34,
@@ -104,7 +110,7 @@ class _CategoryWiseScreenState extends State<CategoryWiseScreen> {
             // maxCrossAxisExtent: 150,
             crossAxisCount: 2,
             crossAxisSpacing: 0,  
-            mainAxisSpacing: 0,
+            mainAxisSpacing: 5,
             childAspectRatio: 3 / 5),
         // padding: EdgeInsets.all(0),
         physics: BouncingScrollPhysics(),
@@ -113,7 +119,7 @@ class _CategoryWiseScreenState extends State<CategoryWiseScreen> {
           return ProductCard(
             id: 1, 
             image:
-                "https://nvshoppe.thedigitalkranti.com/public/uploads/all/o7DXucyzPbnF9KjrzWDkhd39FSrWu2VxkzmRVq2j.jpg",
+                "https://ik.imagekit.io/dunzo/tr:w-,cm-pad_resize/bnlETWxJcVV3azIvdGlFcVpKbFlFdz09-product_image.jpg",
             name: "Nivea Cream",
             main_price: "500 ML",
             stroked_price: "₹250",
@@ -177,58 +183,58 @@ buildCategoryList() {
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemBuilder: (context, index) {
-        return GestureDetector(
-          onTap: () {},
-          child: Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: 5,
-              vertical: 5,
-            ),
-            margin: EdgeInsets.symmetric(
-              horizontal: 0,
-              vertical: 5,
-            ),
-            decoration: BoxDecoration(
-              // color: Colors.black,
-
-              border: Border(
-                right: BorderSide(
-                  width: 2,
-                  color: MyTheme.dark_grey,
+        return Container(
+            margin: EdgeInsets.symmetric(vertical:12),
+               
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+             Column(
+              crossAxisAlignment:CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                 Container(
+            margin: EdgeInsets.only(right:5,top:5),
+                  
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                child: FadeInImage.assetNetwork(
+                  placeholder: 'assets/placeholder.png',
+                  image:
+                      "https://ik.imagekit.io/dunzo/tr:w-,cm-pad_resize/bnlETWxJcVV3azIvdGlFcVpKbFlFdz09-product_image.jpg",
+                  fit: BoxFit.cover,
                 ),
               ),
-              boxShadow: [
-                BoxShadow(
-                  color: MyTheme.white,
-                  spreadRadius: 1,
-                  blurRadius: 20,
-                  offset: const Offset(0, 20),
-                ).scale(5)
-              ],
-            ),
-            child: Column(
-              children: [
-                CircleAvatar(
-                  backgroundColor: Colors.white,
-                  child: FadeInImage.assetNetwork(
-                    placeholder: 'assets/placeholder.png',
-                    image:
-                        "https://5.imimg.com/data5/NI/MA/HZ/SELLER-72734825/moisture-nivea-cream-500x500.jpg",
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                Text(
-                  "Catgeory",
+              SizedBox(height:5,),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "Amul Milk",
                   textAlign: TextAlign.center,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
-                      fontSize: 10,
+                      fontSize: 12,
                       color: Colors.black,
                       fontWeight: FontWeight.bold),
                 ),
+              ),
               ],
-            ),
+             ),
+              Container(
+                width: 5,
+                height:80,
+                decoration: BoxDecoration(
+                  color: Colors.green,
+                  borderRadius: BorderRadius.only(topLeft:Radius.circular(8),bottomLeft:Radius.circular(8),)
+                ),
+              )
+            ],
           ),
         );
       },

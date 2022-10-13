@@ -35,9 +35,9 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  String _login_by = "email"; //phone or email
-  String initialCountry = 'US';
-  PhoneNumber phoneCode = PhoneNumber(isoCode: 'US', dialCode: "+1");
+  String _login_by = "phone"; //phone or email
+  String initialCountry = 'India';
+  PhoneNumber phoneCode = PhoneNumber(isoCode: 'India', dialCode: "+91");
   String _phone = "";
 
   //controllers
@@ -61,13 +61,14 @@ class _LoginState extends State<Login> {
   }
 
   onPressedLogin() async {
-    var email = _emailController.text.toString();
+    var phone = _phoneNumberController.text.toString();
     var password = _passwordController.text.toString();
 
-    if (_login_by == 'email' && email == "") {
-      ToastComponent.showDialog(AppLocalizations.of(context).login_screen_email_warning, gravity: Toast.center, duration: Toast.lengthLong);
-      return;
-    } else if (_login_by == 'phone' && _phone == "") {
+    // if (_login_by == 'email' && email == "") {
+    //   ToastComponent.showDialog(AppLocalizations.of(context).login_screen_email_warning, gravity: Toast.center, duration: Toast.lengthLong);
+    //   return;
+    // } 
+     if (_login_by == 'phone' && _phone == "") {
       ToastComponent.showDialog(AppLocalizations.of(context).login_screen_phone_warning, gravity: Toast.center, duration: Toast.lengthLong);
       return;
     } else if (password == "") {
@@ -76,7 +77,7 @@ class _LoginState extends State<Login> {
     }
 
     var loginResponse = await AuthRepository()
-        .getLoginResponse(_login_by == 'email' ? email : _phone, password);
+        .getLoginResponse(phone, password);
     if (loginResponse.result == false) {
       ToastComponent.showDialog(loginResponse.message, gravity: Toast.center, duration: Toast.lengthLong);
     } else {
@@ -284,49 +285,50 @@ class _LoginState extends State<Login> {
                       Padding(
                         padding: const EdgeInsets.only(bottom: 4.0),
                         child: Text(
-                          _login_by == "email" ? AppLocalizations.of(context).login_screen_email : AppLocalizations.of(context).login_screen_phone,
+                          // _login_by == "email" ? AppLocalizations.of(context).login_screen_email : 
+                          AppLocalizations.of(context).login_screen_phone,
                           style: TextStyle(
                               color: MyTheme.accent_color,
                               fontWeight: FontWeight.w600),
                         ),
                       ),
-                      if (_login_by == "email")
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Container(
-                                height: 36,
-                                child: TextField(
-                                  controller: _emailController,
-                                  autofocus: false,
-                                  decoration:
-                                      InputDecorations.buildInputDecoration_1(
-                                          hint_text: "johndoe@example.com"),
-                                ),
-                              ),
-                              otp_addon_installed.$
-                                  ? GestureDetector(
-                                      onTap: () {
-                                        setState(() {
-                                          _login_by = "phone";
-                                        });
-                                      },
-                                      child: Text(
-                                          AppLocalizations.of(context).login_screen_or_login_with_phone,
-                                        style: TextStyle(
-                                            color: MyTheme.accent_color,
-                                            fontStyle: FontStyle.italic,
-                                            decoration:
-                                                TextDecoration.underline),
-                                      ),
-                                    )
-                                  : Container()
-                            ],
-                          ),
-                        )
-                      else
+                      // if (_login_by == "phone")
+                        // Padding(
+                        //   padding: const EdgeInsets.only(bottom: 8.0),
+                        //   child: Column(
+                        //     crossAxisAlignment: CrossAxisAlignment.end,
+                        //     children: [
+                        //       Container(
+                        //         height: 36,
+                        //         child: TextField(
+                        //           controller: _emailController,
+                        //           autofocus: false,
+                        //           decoration:
+                        //               InputDecorations.buildInputDecoration_1(
+                        //                   hint_text: "johndoe@example.com"),
+                        //         ),
+                        //       ),
+                        //       otp_addon_installed.$
+                        //           // ? GestureDetector(
+                        //               onTap: () {
+                        //                 setState(() {
+                        //                   _login_by = "phone";
+                        //                 });
+                        //               },
+                        //               child: Text(
+                        //                   AppLocalizations.of(context).login_screen_or_login_with_phone,
+                        //                 style: TextStyle(
+                        //                     color: MyTheme.accent_color,
+                        //                     fontStyle: FontStyle.italic,
+                        //                     decoration:
+                        //                         TextDecoration.underline),
+                        //               ),
+                        //             )
+                        //           : Container()
+                        //     ],
+                        //   ),
+                        // )
+                    
                         Padding(
                           padding: const EdgeInsets.only(bottom: 8.0),
                           child: Column(
@@ -360,31 +362,31 @@ class _LoginState extends State<Login> {
                                       signed: true, decimal: true),
                                   inputDecoration: InputDecorations
                                       .buildInputDecoration_phone(
-                                          hint_text: "01XXX XXX XXX"),
+                                          hint_text: "91XX XXX XXX"),
                                   onSaved: (PhoneNumber number) {
                                     print('On Saved: $number');
                                   },
                                 ),
                               ),
-                              GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    _login_by = "email";
-                                  });
-                                },
-                                child: Text(
-                                  AppLocalizations.of(context).login_screen_or_login_with_email,
-                                  style: TextStyle(
-                                      color: MyTheme.accent_color,
-                                      fontStyle: FontStyle.italic,
-                                      decoration: TextDecoration.underline),
-                                ),
-                              )
+                              // GestureDetector(
+                              //   onTap: () {
+                              //     setState(() {
+                              //       _login_by = "email";
+                              //     });
+                              //   },
+                              //   child: Text(
+                              //     AppLocalizations.of(context).login_screen_or_login_with_email,
+                              //     style: TextStyle(
+                              //         color: MyTheme.amber,
+                              //         fontStyle: FontStyle.italic,
+                              //         decoration: TextDecoration.underline),
+                              //   ),
+                              // )
                             ],
                           ),
                         ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 4.0),
+                        padding: const EdgeInsets.only(bottom: 4.0,top:20),
                         child: Text(
                           AppLocalizations.of(context).login_screen_password,
                           style: TextStyle(

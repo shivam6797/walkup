@@ -10,7 +10,7 @@ class InputDecorations {
         hintStyle: TextStyle(fontSize: 12.0, color: MyTheme.textfield_grey),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
-              color: MyTheme.noColor,
+              color: MyTheme.dark_grey,
               width: 0.2),
           borderRadius: const BorderRadius.all(
             const Radius.circular(6.0),

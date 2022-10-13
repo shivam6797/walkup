@@ -25,9 +25,9 @@ class Registration extends StatefulWidget {
 }
 
 class _RegistrationState extends State<Registration> {
-  String _register_by = "email"; //phone or email
-  String initialCountry = 'US';
-  PhoneNumber phoneCode = PhoneNumber(isoCode: 'US', dialCode: "+1");
+  String _register_by = "phone"; //phone or email
+  String initialCountry = 'India';
+  PhoneNumber phoneCode = PhoneNumber(isoCode: 'India', dialCode: "+91");
 
   String _phone = "";
   bool _isAgree =false;
@@ -56,17 +56,19 @@ class _RegistrationState extends State<Registration> {
 
   onPressSignUp() async {
     var name = _nameController.text.toString();
-    var email = _emailController.text.toString();
+    var phone = _phoneNumberController.text.toString();
     var password = _passwordController.text.toString();
     var password_confirm = _passwordConfirmController.text.toString();
 
     if (name == "") {
       ToastComponent.showDialog(AppLocalizations.of(context).registration_screen_name_warning, gravity: Toast.center, duration: Toast.lengthLong);
       return;
-    } else if (_register_by == 'email' &&( email == "" || !isEmail(email))) {
-      ToastComponent.showDialog(AppLocalizations.of(context).registration_screen_email_warning, gravity: Toast.center, duration: Toast.lengthLong);
-      return;
-    } else if (_register_by == 'phone' && _phone == "") {
+    } 
+    // else if (_register_by == 'phone' &&( email == "" || !isEmail(email))) {
+    //   ToastComponent.showDialog(AppLocalizations.of(context).registration_screen_email_warning, gravity: Toast.center, duration: Toast.lengthLong);
+    //   return;
+    // }
+     else if (_register_by == 'phone' && phone == "") {
       ToastComponent.showDialog(AppLocalizations.of(context).registration_screen_phone_warning, gravity: Toast.center, duration: Toast.lengthLong);
       return;
     } else if (password == "") {
@@ -86,7 +88,7 @@ class _RegistrationState extends State<Registration> {
 
     var signupResponse = await AuthRepository().getSignupResponse(
         name,
-        _register_by == 'email' ? email : _phone,
+        phone,
         password,
         password_confirm,
         _register_by);
@@ -95,7 +97,7 @@ class _RegistrationState extends State<Registration> {
       ToastComponent.showDialog(signupResponse.message, gravity: Toast.center, duration: Toast.lengthLong);
     } else {
       ToastComponent.showDialog(signupResponse.message, gravity: Toast.center, duration: Toast.lengthLong);
-      if(mail_verification_status.$ && _register_by=="email") {
+      if(_register_by=="phone") {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return Otp(
             verify_by: _register_by,
@@ -152,50 +154,52 @@ class _RegistrationState extends State<Registration> {
                       Padding(
                         padding: const EdgeInsets.only(bottom: 4.0),
                         child: Text(
-                          _register_by == "email" ? AppLocalizations.of(context).registration_screen_email : AppLocalizations.of(context).registration_screen_phone,
+                          // _register_by == "email" ? AppLocalizations.of(context).registration_screen_email :
+                           AppLocalizations.of(context).registration_screen_phone,
                           style: TextStyle(
                               color: MyTheme.accent_color,
                               fontWeight: FontWeight.w600),
                         ),
                       ),
-                      if (_register_by == "email")
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Container(
-                                height: 36,
-                                child: TextField(
+                      // if (_register_by == "email")
+                      //   Padding(
+                      //     padding: const EdgeInsets.only(bottom: 8.0),
+                      //     child: Column(
+                      //       crossAxisAlignment: CrossAxisAlignment.end,
+                      //       children: [
+                      //         Container(
+                      //           height: 36,
+                      //           child: TextField(
 
-                                  controller: _emailController,
-                                  autofocus: false,
-                                  decoration:
-                                      InputDecorations.buildInputDecoration_1(
-                                          hint_text: "johndoe@example.com"),
-                                ),
-                              ),
-                              otp_addon_installed.$
-                                  ? GestureDetector(
-                                      onTap: () {
-                                        setState(() {
-                                          _register_by = "phone";
-                                        });
-                                      },
-                                      child: Text(
-                                        AppLocalizations.of(context).registration_screen_or_register_with_phone,
-                                        style: TextStyle(
-                                            color: MyTheme.accent_color,
-                                            fontStyle: FontStyle.italic,
-                                            decoration:
-                                                TextDecoration.underline),
-                                      ),
-                                    )
-                                  : Container()
-                            ],
-                          ),
-                        )
-                      else
+                      //             controller: _emailController,
+                      //             autofocus: false,
+                      //             decoration:
+                      //                 InputDecorations.buildInputDecoration_1(
+                      //                     hint_text: "johndoe@example.com"),
+                      //           ),
+                      //         ),
+                      //         otp_addon_installed.$
+                      //             ? 
+                      //             GestureDetector(
+                      //                 onTap: () {
+                      //                   setState(() {
+                      //                     _register_by = "phone";
+                      //                   });
+                      //                 },
+                      //                 child: Text(
+                      //                   AppLocalizations.of(context).registration_screen_or_register_with_phone,
+                      //                   style: TextStyle(
+                      //                       color: MyTheme.accent_color,
+                      //                       fontStyle: FontStyle.italic,
+                      //                       decoration:
+                      //                           TextDecoration.underline),
+                      //                 ),
+                      //               )
+                      //             : Container()
+                      //       ],
+                      //     ),
+                      //   )
+                      // else
                         Padding(
                           padding: const EdgeInsets.only(bottom: 8.0),
                           child: Column(
@@ -233,20 +237,20 @@ class _RegistrationState extends State<Registration> {
                                   },
                                 ),
                               ),
-                              GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    _register_by = "email";
-                                  });
-                                },
-                                child: Text(
-                                  AppLocalizations.of(context).registration_screen_or_register_with_email,
-                                  style: TextStyle(
-                                      color: MyTheme.accent_color,
-                                      fontStyle: FontStyle.italic,
-                                      decoration: TextDecoration.underline),
-                                ),
-                              )
+                              // GestureDetector(
+                              //   onTap: () {
+                              //     setState(() {
+                              //       _register_by = "email";
+                              //     });
+                              //   },
+                              //   child: Text(
+                              //     AppLocalizations.of(context).registration_screen_or_register_with_email,
+                              //     style: TextStyle(
+                              //         color: MyTheme.accent_color,
+                              //         fontStyle: FontStyle.italic,
+                              //         decoration: TextDecoration.underline),
+                              //   ),
+                              // )
                             ],
                           ),
                         ),
@@ -371,7 +375,7 @@ class _RegistrationState extends State<Registration> {
                           height: 45,
                           child: FlatButton(
                             minWidth: MediaQuery.of(context).size.width,
-                            disabledColor: MyTheme.grey_153,
+                            disabledColor: MyTheme.amber,
                             //height: 50,
                             color: MyTheme.accent_color,
                             shape: RoundedRectangleBorder(
@@ -380,7 +384,7 @@ class _RegistrationState extends State<Registration> {
                             child: Text(
                               AppLocalizations.of(context).registration_screen_register_sign_up,
                               style: TextStyle(
-                                  color: Colors.white,
+                                  color: Colors.red,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w600),
                             ),
