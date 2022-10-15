@@ -93,7 +93,7 @@ class _PaymentSummuryScreenState extends State<PaymentSummuryScreen> {
           titleSpacing: 0.0,
           actions:  [
             Padding(
-              padding: EdgeInsets.all(20.0),
+              padding: EdgeInsets.only(right:15.0),
               child: IconButton(onPressed:(){
                 Navigator.push(context,MaterialPageRoute(builder:(context)=>  Home()));
               }, icon: Icon(
@@ -105,17 +105,17 @@ class _PaymentSummuryScreenState extends State<PaymentSummuryScreen> {
           ],
         ),
         body: ListView(
-          physics: NeverScrollableScrollPhysics(),
+          physics: BouncingScrollPhysics(),
           shrinkWrap: true,
           children: [
             DataTableWidget(),
             const SizedBox(
-              height: 10,
+              height: 5,
             ),
             Container(
-              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 6),
+              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 3),
               width: MediaQuery.of(context).size.width,
-              height: 152,
+              height: 96,
               decoration: BoxDecoration(
                 color: Colors.white,
                 boxShadow: [
@@ -168,35 +168,35 @@ class _PaymentSummuryScreenState extends State<PaymentSummuryScreen> {
                     color: Colors.grey[400],
                     thickness: 0.7,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          "Cash On Delivery",
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600),
-                        ),
-                        Checkbox(
-                          side:
-                              const BorderSide(color: Colors.blue, width: 1.5),
-                          value: values,
-                          shape: const CircleBorder(),
-                          onChanged: (value) {
-                            setState(() {
-                              values = value;
-                            });
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
+                  // Padding(
+                  //   padding: const EdgeInsets.only(left: 10.0),
+                  //   child: Row(
+                  //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //     children: [
+                  //       const Text(
+                  //         "Cash On Delivery",
+                  //         style: TextStyle(
+                  //             color: Colors.black,
+                  //             fontSize: 15,
+                  //             fontWeight: FontWeight.w600),
+                  //       ),
+                  //       Checkbox(
+                  //         side:
+                  //             const BorderSide(color: Colors.blue, width: 1.5),
+                  //         value: values,
+                  //         shape: const CircleBorder(),
+                  //         onChanged: (value) {
+                  //           setState(() {
+                  //             values = value;
+                  //           });
+                  //         },
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
                   Padding(
                     padding:
-                        const EdgeInsets.only(left: 10.0, top: 0, bottom: 8),
+                        const EdgeInsets.only(left: 10.0, top: 0, bottom: 0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

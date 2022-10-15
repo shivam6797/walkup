@@ -1,3 +1,4 @@
+import 'package:active_ecommerce_flutter/screens/product_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
@@ -7,6 +8,7 @@ class ProductCard extends StatefulWidget {
   String name;
   String subName;
   String main_price;
+  String stroked_price_underline;
   String stroked_price;
   String addQunatity;
   bool has_discount;
@@ -18,6 +20,7 @@ class ProductCard extends StatefulWidget {
       this.main_price,
       this.name,
       this.stroked_price,
+      this.stroked_price_underline,
       this.subName,
       this.addQunatity,
       })
@@ -33,29 +36,37 @@ class _ProductCardState extends State<ProductCard> {
       print((MediaQuery.of(context).size.width - 48) / 2);
     return InkWell(
       onTap: () {
-        // Navigator.push(context, MaterialPageRoute(builder: (context) {
-        //   return ProductDetails(
-        //     id: widget.id,
-        //   );
-        // }));
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return ProductDetails(
+            id: widget.id,
+          );
+        }));
       },
-      child: Card(
-        
-        margin: EdgeInsets.only(right:5),
-        //clipBehavior: Clip.antiAliasWithSaveLayer,
-        shape: RoundedRectangleBorder(
-          // side: new BorderSide(color:Colors.grey, width:0.5),
-          borderRadius: BorderRadius.circular(10.0),
+      child: Container(
+        width: 100,
+        margin: EdgeInsets.symmetric(horizontal:2),
+        decoration:BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.shade400,
+                    offset: Offset(5.0, 5.0),
+                    blurRadius: 5.00,
+                    spreadRadius: 5.0,
+                  ),
+                ],
         ),
-        elevation: 3.0,
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Container(
                   width: double.infinity,
-                  // height: 80,
-                  //height: (( MediaQuery.of(context).size.width - 28 ) / 2) + 2,
+                  // height: 100,
+                  // margin: EdgeInsets.only(bottom:40),
+                  // color: Colors.amber,
+                  height: (( MediaQuery.of(context).size.width - 150 ) / 2) + 2,
                   child: ClipRRect(
                       clipBehavior: Clip.hardEdge,
                       borderRadius: BorderRadius.vertical(
@@ -71,16 +82,16 @@ class _ProductCardState extends State<ProductCard> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsets.fromLTRB(8, 5, 16, 0),
+                      padding: EdgeInsets.fromLTRB(8, 0, 16, 0),
                       child: Text(
                         widget.name,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                         style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 14,
+                            color: Colors.black,
+                            fontSize: 12,
                             height: 1.2,
-                            fontWeight: FontWeight.w400),
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
                     Padding(
@@ -90,70 +101,88 @@ class _ProductCardState extends State<ProductCard> {
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                         style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 14,
+                            color: Colors.black,
+                            fontSize: 12,
                             height: 1.2,
-                            fontWeight: FontWeight.w400),
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.fromLTRB(8, 0, 16, 0),
+                      padding: EdgeInsets.fromLTRB(8, 9, 16, 0),
                       child: Text(
                         widget.main_price,
                         textAlign: TextAlign.left,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                         style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 14,
+                            color: Colors.grey,
+                            fontSize: 12,
                             fontWeight: FontWeight.w500),
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(8, 8, 16, 8),
-                          child: Text(
-                            widget.stroked_price,
-                            textAlign: TextAlign.left,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
-                            style: TextStyle(
-                                // decoration: TextDecoration.lineThrough,
-                                color: Colors.black,
-                                fontSize: 13,
-                                fontWeight: FontWeight.w600),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0,18,0,0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                widget.stroked_price,
+                                textAlign: TextAlign.left,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                style: TextStyle(
+                                    // decoration: TextDecoration.lineThrough,
+                                    color: Colors.black,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(height:1,),
+                               Text(
+                                widget.stroked_price_underline,
+                                textAlign: TextAlign.left,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                style: TextStyle(
+                                    decoration: TextDecoration.lineThrough,
+                                    color: Colors.grey[500],
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            ],
                           ),
-                        ),
-                             Container(
-                               height: 25,
-                               width: 60,
-                               decoration: BoxDecoration(
-                                 borderRadius:BorderRadius.circular(10),
-                                 color: Colors.green
+                     
+                               Container(
+                                 height: 25,
+                                 width: 70,
+                                 decoration: BoxDecoration(
+                                   borderRadius:BorderRadius.circular(5),
+                                   color: Colors.green[50],
+                                   border: Border.all(color: Colors.green,width:0.5)
+                                 ),
+                                 child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                   children: [
+                                     Text(
+                                     widget.addQunatity,
+                                     textAlign: TextAlign.left,
+                                     overflow: TextOverflow.ellipsis,
+                                     maxLines: 1,
+                                     style: TextStyle(
+                                        //  decoration: TextDecoration.lineThrough,
+                                         color: Colors.green,
+                                         fontSize: 11,
+                                         fontWeight: FontWeight.w600),
                                ),
-                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                 children: [
-                                  //  Icon(FontAwesome.minus,color: Colors.white,size:10),
-                                   Text(
-                                   widget.addQunatity,
-                                   textAlign: TextAlign.left,
-                                   overflow: TextOverflow.ellipsis,
-                                   maxLines: 1,
-                                   style: TextStyle(
-                                      //  decoration: TextDecoration.lineThrough,
-                                       color: Colors.grey[200],
-                                       fontSize: 11,
-                                       fontWeight: FontWeight.w600),
-                             ),
-                                  //  Icon(FontAwesome.plus,color: Colors.white,size:10),
+                                    //  Icon(FontAwesome.plus,color: Colors.white,size:10),
 
-                                 ],
+                                   ],
+                                 ),
                                ),
-                             ),
-                      ],
+                        ],
+                      ),
                     )
                   ],
                 ),

@@ -17,7 +17,7 @@ class _CategoryWiseScreenState extends State<CategoryWiseScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.grey[200],
         appBar: buildAppBar(context),
         body: SingleChildScrollView(
           physics: NeverScrollableScrollPhysics(),
@@ -31,25 +31,24 @@ class _CategoryWiseScreenState extends State<CategoryWiseScreen> {
                 ),
                 buildCategory(),
                 Container(
-                  margin: EdgeInsets.symmetric(vertical:5),
-                  height: MediaQuery.of(context).size.height/1.10,
+                  margin: EdgeInsets.symmetric(vertical: 5),
+                  height: MediaQuery.of(context).size.height / 1.10,
                   // width: MediaQuery.of(context).size.width,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Card(
-                        elevation: 10,
+                        elevation: 5,
                         child: Container(
-                            width: MediaQuery.of(context).size.width / 4.5,
+                            width: MediaQuery.of(context).size.width / 4.4,
                             color: Colors.white,
                             child: buildCategoryList()),
                       ),
                       buildProductList(),
-                      // Align(
-                      //   alignment: Alignment.bottomCenter,
-                      //   child: buildLoadingContainer(),
-                      // )
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height / 1.10,
+                      )
                     ],
                   ),
                 ),
@@ -61,55 +60,65 @@ class _CategoryWiseScreenState extends State<CategoryWiseScreen> {
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-        backgroundColor: MyTheme.white,
-        elevation: 1,
-        titleSpacing: 0,
-        leading: Builder(
-          builder: (context) => IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.grey),
-            onPressed: () => Navigator.of(context).pop(),
+      backgroundColor: MyTheme.white,
+      elevation: 1,
+      titleSpacing: 0,
+      leading: Builder(
+        builder: (context) => IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.grey),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+      ),
+      title: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Dairy & Breakfast",
+            overflow: TextOverflow.ellipsis,
+            maxLines: 2,
+            style: TextStyle(
+                color: Colors.black,
+                fontSize: 15,
+                height: 1.2,
+                fontWeight: FontWeight.bold),
+          ),
+          SizedBox(height:5,),
+          Text(
+            "330 Products",
+            overflow: TextOverflow.ellipsis,
+            maxLines: 2,
+            style: TextStyle(
+                color: Colors.grey[600],
+                fontSize: 10,
+                height: 1.2,
+                fontWeight: FontWeight.bold),
+          ),
+        ],
+      ),
+      actions: [
+        Padding(
+          padding: const EdgeInsets.only(right:20.0),
+          child: Icon(
+            Icons.search,
+            color: MyTheme.dark_grey,
           ),
         ),
-        title: Container(
-          margin: EdgeInsets.only(right: 15),
-          width: double.infinity,
-          height: 40,
-          decoration: BoxDecoration(
-              color: MyTheme.light_grey,
-              borderRadius: BorderRadius.circular(5)),
-          child: Center(
-            child: TextField(
-              cursorColor: MyTheme.dark_grey,
-              cursorHeight: 23,
-              decoration: InputDecoration(
-                  isCollapsed: true,
-                  isDense: true,
-                  contentPadding: EdgeInsets.only(left: 15, top: 10, bottom: 8),
-                  suffixIcon: Icon(
-                    Icons.search,
-                    color: MyTheme.dark_grey,
-                  ),
-                  hintText: 'Search anything...',
-                  border: InputBorder.none),
-            ),
-          ),
-        ));
+      ],
+    );
   }
-
-   
 
   buildProductList() {
     return Container(
-      width: MediaQuery.of(context).size.width / 1.34,
+      width: MediaQuery.of(context).size.width / 1.35,
       // color: Colors.amber,
-      
+
       child: GridView.builder(
-        itemCount: 10,
+        itemCount: 50,
         controller: _scrollController,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             // maxCrossAxisExtent: 150,
             crossAxisCount: 2,
-            crossAxisSpacing: 0,  
+            crossAxisSpacing: 0,
             mainAxisSpacing: 5,
             childAspectRatio: 3 / 5),
         // padding: EdgeInsets.all(0),
@@ -117,16 +126,16 @@ class _CategoryWiseScreenState extends State<CategoryWiseScreen> {
         // shrinkWrap: true,
         itemBuilder: (context, index) {
           return ProductCard(
-            id: 1, 
+            id: 1,
             image:
                 "https://ik.imagekit.io/dunzo/tr:w-,cm-pad_resize/bnlETWxJcVV3azIvdGlFcVpKbFlFdz09-product_image.jpg",
-            name: "Nivea Cream",
+            name: "Amul Taaza",
             main_price: "500 ML",
-            stroked_price: "₹250",
-            subName: "Cream",
-            addQunatity: "ADD",
+            stroked_price: "₹25",
+            subName: "Toned Fresh Milk",
+            stroked_price_underline: "₹30",
+            addQunatity: "ADD  +",
             has_discount: true,
-
           );
         },
       ),
@@ -144,8 +153,8 @@ buildCategory() {
           shrinkWrap: true,
           itemBuilder: (BuildContext context, index) {
             return Container(
-              height: 80,
-              width: 100,
+              height: 120,
+              width: 120,
               margin: EdgeInsets.symmetric(horizontal: 3),
               alignment: Alignment.center,
               decoration: BoxDecoration(
@@ -184,55 +193,57 @@ buildCategoryList() {
       shrinkWrap: true,
       itemBuilder: (context, index) {
         return Container(
-            margin: EdgeInsets.symmetric(vertical:12),
-               
+          margin: EdgeInsets.symmetric(vertical: 12),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-             Column(
-              crossAxisAlignment:CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                 Container(
-            margin: EdgeInsets.only(right:5,top:5),
-                  
-                  width: 50,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: Colors.grey[200],
-                    borderRadius: BorderRadius.circular(50),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(right: 5, top: 5),
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                    child: FadeInImage.assetNetwork(
+                      placeholder: 'assets/placeholder.png',
+                      image:
+                          "https://ik.imagekit.io/dunzo/tr:w-,cm-pad_resize/bnlETWxJcVV3azIvdGlFcVpKbFlFdz09-product_image.jpg",
+                      fit: BoxFit.cover,
+                    ),
                   ),
-                child: FadeInImage.assetNetwork(
-                  placeholder: 'assets/placeholder.png',
-                  image:
-                      "https://ik.imagekit.io/dunzo/tr:w-,cm-pad_resize/bnlETWxJcVV3azIvdGlFcVpKbFlFdz09-product_image.jpg",
-                  fit: BoxFit.cover,
-                ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      "Amul Milk",
+                      textAlign: TextAlign.center,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
               ),
-              SizedBox(height:5,),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  "Amul Milk",
-                  textAlign: TextAlign.center,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-              ],
-             ),
               Container(
                 width: 5,
-                height:80,
+                height: 80,
                 decoration: BoxDecoration(
-                  color: Colors.green,
-                  borderRadius: BorderRadius.only(topLeft:Radius.circular(8),bottomLeft:Radius.circular(8),)
-                ),
+                    color: Colors.green,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(8),
+                      bottomLeft: Radius.circular(8),
+                    )),
               )
             ],
           ),

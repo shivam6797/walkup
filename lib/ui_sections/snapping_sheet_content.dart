@@ -150,83 +150,7 @@ class _SnappingSheetWidgetState extends State<SnappingSheetWidget> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Container(
-                        height: 50,
-                        alignment: Alignment.topLeft,
-                        margin: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 20),
-                        decoration: BoxDecoration(
-                          color: const Color.fromRGBO(239, 239, 239, 1),
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                             PaymentSummuryScreen()));
-                              },
-                              child: Material(
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(80),
-                                    topRight: Radius.circular(100),
-                                    bottomLeft: Radius.circular(80),
-                                    bottomRight: Radius.circular(100),
-                                  ),
-                                ),
-                                elevation: 2,
-                                child: Container(
-                                  width:
-                                      MediaQuery.of(context).size.width / 3.9,
-                                  height: 70,
-                                  decoration: const BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(80),
-                                      topRight: Radius.circular(100),
-                                      bottomLeft: Radius.circular(80),
-                                      bottomRight: Radius.circular(100),
-                                    ),
-                                  ),
-                                  child:
-                                      Image.asset("assets/cbimage.png"),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              width: 80,
-                              padding: const EdgeInsets.only(left: 8),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: const [
-                                  Icon(
-                                    FontAwesomeIcons.cartShopping,
-                                    color: Colors.black,
-                                    size: 20,
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text(
-                                    '\$30.2',
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        overflow: TextOverflow.ellipsis,
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.bold),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Column(
+                       Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Icon(
@@ -264,6 +188,84 @@ class _SnappingSheetWidgetState extends State<SnappingSheetWidget> {
                           ),
                         ],
                       ),
+                      Container(
+                        height: 50,
+                        alignment: Alignment.topLeft,
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 0, vertical: 20),
+                        decoration: BoxDecoration(
+                          color: const Color.fromRGBO(239, 239, 239, 1),
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                          
+                            Container(
+                              width: 80,
+                              padding: const EdgeInsets.only(left: 15),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: const [
+                                  Icon(
+                                    FontAwesomeIcons.cartShopping,
+                                    color: Colors.black,
+                                    size: 20,
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    '₹300',
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        overflow: TextOverflow.ellipsis,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold),
+                                  )
+                                ],
+                              ),
+                            ),
+                              GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                             PaymentSummuryScreen()));
+                              },
+                              child: Material(
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(80),
+                                    topRight: Radius.circular(100),
+                                    bottomLeft: Radius.circular(80),
+                                    bottomRight: Radius.circular(100),
+                                  ),
+                                ),
+                                elevation: 2,
+                                child: Container(
+                                  width:
+                                      MediaQuery.of(context).size.width / 3.0,
+                                  height: 70,
+                                  decoration: const BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(80),
+                                      topRight: Radius.circular(100),
+                                      bottomLeft: Radius.circular(80),
+                                      bottomRight: Radius.circular(100),
+                                    ),
+                                  ),
+                                  child:
+                                      Image.asset("assets/cbimage.png"),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                     
                     ],
                   ),
                 ],

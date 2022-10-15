@@ -27,6 +27,7 @@ import 'package:active_ecommerce_flutter/custom/box_decorations.dart';
 import 'package:active_ecommerce_flutter/ui_elements/mini_product_card.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Home extends StatefulWidget {
   Home(
@@ -276,7 +277,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               appBar: PreferredSize(
                 preferredSize: Size.fromHeight(50),
                 child: buildHomeAppBar(context),
-                
+
                 // buildAppBar(statusBarHeight, context),
               ),
               drawer: MainDrawer(),
@@ -385,8 +386,25 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                                 ],
                               ),
                             ),
+                            SizedBox(
+                              height: 62,
+                            ),
+                            buildSelfCheckout(context),
+                             SizedBox(
+                              height: 5,
+                            ),
+                            buildSelfPickup(context),
+                               SizedBox(
+                              height: 5,
+                            ),
+                            buildPackForMe(context),
+                               SizedBox(
+                              height: 5,
+                            ),
+                            buildOrderOnline(context),
                           ]),
                         ),
+
                         // SliverList(
                         //   delegate: SliverChildListDelegate([
                         //     Padding(
@@ -839,34 +857,333 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     );
   }
 
-
- Widget buildGuidPage(BuildContext context){
-  return Flexible(
-          flex: 1,
-          fit: FlexFit.tight,
-          child: GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return CategoryWiseScreen();
-              }));
-            },
-            child: Container(
-              height: 50,
-              decoration: BoxDecorations.buildBoxDecoration_1(),
-              child: Center(
-                child: Text("Pack",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: Color.fromRGBO(132, 132, 132, 1),
-                        fontWeight: FontWeight.w300)),
+  Widget buildSelfCheckout(BuildContext context) {
+    return Flexible(
+      flex: 1,
+      fit: FlexFit.tight,
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return CategoryWiseScreen();
+          }));
+        },
+        child: Container(
+          height: 88,
+          decoration: BoxDecorations.buildBoxDecoration_1(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0, top: 5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Icon(
+                      FontAwesomeIcons.lightbulb,
+                      color: Colors.amber,
+                      size: 18,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: Text("Self Checkout:",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 12,
+                              color: Color.fromRGBO(132, 132, 132, 1),
+                              fontWeight: FontWeight.bold)),
+                    ),
+                  ],
+                ),
               ),
-
-              
-            ),
+              SizedBox(
+                height: 2,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                   Text(
+                      "Just enter the store pick the product scan the product,\n once yo ,are done just make the payment  online get,\n checked the products by the executive and its done.",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 12,
+                          color: Color.fromRGBO(132, 132, 132, 1),
+                          fontWeight: FontWeight.w300)),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: Icon(
+                      FontAwesomeIcons.youtube,
+                      color: Colors.red,
+                      size: 18,
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
-        );
- }
+        ),
+      ),
+    );
+  }
 
+  Widget buildSelfPickup(BuildContext context) {
+    return Flexible(
+      flex: 1,
+      fit: FlexFit.tight,
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return CategoryWiseScreen();
+          }));
+        },
+        child: Container(
+          height: 88,
+          decoration: BoxDecorations.buildBoxDecoration_1(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0, top: 5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Icon(
+                      FontAwesomeIcons.lightbulb,
+                      color: Colors.amber,
+                      size: 18,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: Text("Self Pickup:",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 12,
+                              color: Color.fromRGBO(132, 132, 132, 1),
+                              fontWeight: FontWeight.bold)),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 3,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                   Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                     children: [
+                       Text(
+                          "Open the app place the order make the payment online,\nor choose,the pay at store option. It’s time to go to store,\n pick your products,get checked the products by the and, ",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 12,
+                              color: Color.fromRGBO(132, 132, 132, 1),
+                              fontWeight: FontWeight.w300)),
+                         Padding(
+                           padding: const EdgeInsets.only(left:3.0),
+                           child: Text(
+                            "executive and its done.",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 12,
+                                color: Color.fromRGBO(132, 132, 132, 1),
+                                fontWeight: FontWeight.w300)),
+                         ),      
+                     ],
+                   ),
+                 
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: Icon(
+                      FontAwesomeIcons.youtube,
+                      color: Colors.red,
+                      size: 18,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+ Widget buildPackForMe(BuildContext context) {
+    return Flexible(
+      flex: 1,
+      fit: FlexFit.tight,
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return CategoryWiseScreen();
+          }));
+        },
+        child: Container(
+          height: 88,
+          decoration: BoxDecorations.buildBoxDecoration_1(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0, top: 5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Icon(
+                      FontAwesomeIcons.lightbulb,
+                      color: Colors.amber,
+                      size: 18,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: Text("Pack for Me:",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 12,
+                              color: Color.fromRGBO(132, 132, 132, 1),
+                              fontWeight: FontWeight.bold)),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 3,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                   Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                     children: [
+                       Text(
+                          "Open the app place the order, select suitable time for,\npickup make the payment online or choose the pay at,\noption We will pack your order just come and pick the,",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 12,
+                              color: Color.fromRGBO(132, 132, 132, 1),
+                              fontWeight: FontWeight.w300)),
+                         Padding(
+                           padding: const EdgeInsets.only(left:3.0),
+                           child: Text(
+                            "order its as simple as exploring or store.",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 12,
+                                color: Color.fromRGBO(132, 132, 132, 1),
+                                fontWeight: FontWeight.w300)),
+                         ),      
+                     ],
+                   ),
+                 
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: Icon(
+                      FontAwesomeIcons.youtube,
+                      color: Colors.red,
+                      size: 18,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+ Widget buildOrderOnline(BuildContext context) {
+    return Flexible(
+      flex: 1,
+      fit: FlexFit.tight,
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return CategoryWiseScreen();
+          }));
+        },
+        child: Container(
+          height: 88,
+          decoration: BoxDecorations.buildBoxDecoration_1(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0, top: 5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Icon(
+                      FontAwesomeIcons.lightbulb,
+                      color: Colors.amber,
+                      size: 18,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: Text("Order Online:",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 12,
+                              color: Color.fromRGBO(132, 132, 132, 1),
+                              fontWeight: FontWeight.bold)),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 3,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                   Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                     children: [
+                       Text(
+                          "Just open the app find the products yo are willing to,\n buy place the order and we will deliver it at your home,\nat your preferable time. It is super easy to order and,",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 12,
+                              color: Color.fromRGBO(132, 132, 132, 1),
+                              fontWeight: FontWeight.w300)),
+                         Padding(
+                           padding: const EdgeInsets.only(left:5.0),
+                           child: Text(
+                            "required products online.",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 12,
+                                color: Color.fromRGBO(132, 132, 132, 1),
+                                fontWeight: FontWeight.w300)),
+                         ),      
+                     ],
+                   ),
+                 
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: Icon(
+                      FontAwesomeIcons.youtube,
+                      color: Colors.red,
+                      size: 18,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 
 
   Widget buildHomeMenuRow2(BuildContext context) {
