@@ -39,7 +39,7 @@ class _CategoryProductsState extends State<CategoryProducts> {
 
 
   getSubCategory()async{
-   var res=await CategoryRepository().getCategories(parent_id: widget.category_id);
+   var res=await CategoryRepository().getCategories(parent_id:widget.category_id);
    _subCategoryList.addAll(res.categories);
    setState((){});
   }
@@ -204,7 +204,9 @@ class _CategoryProductsState extends State<CategoryProducts> {
         Container(
           padding: EdgeInsets.only(left: 10),
           width: DeviceInfo(context).width/2,
-            child: Text(widget.category_name,maxLines: 1,overflow: TextOverflow.ellipsis,style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),),
+            child: Text(widget.category_name ?? ""
+            
+            ,maxLines: 1,overflow: TextOverflow.ellipsis,style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),),
         Spacer(),
         SizedBox(
           width: 20,
@@ -254,7 +256,7 @@ class _CategoryProductsState extends State<CategoryProducts> {
           "${AppLocalizations
               .of(context)
               .category_products_screen_search_products_from} : " +
-              widget.category_name,
+              widget.category_name ?? "",
           hintStyle: TextStyle(fontSize: 14.0, color: MyTheme.font_grey),
           enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: MyTheme.noColor, width: 0.0),
@@ -298,7 +300,7 @@ class _CategoryProductsState extends State<CategoryProducts> {
                 alignment: Alignment.center,
                 padding: EdgeInsets.symmetric(horizontal: 12),
                 decoration: BoxDecorations.buildBoxDecoration_1(),
-                child: Text(_subCategoryList[index].name,
+                child: Text(_subCategoryList[index].name.toString() ?? "",
                   style: TextStyle(fontSize: 10,fontWeight:FontWeight.bold,color: MyTheme.font_grey),textAlign: TextAlign.center,),
               ),
             );
@@ -335,11 +337,11 @@ class _CategoryProductsState extends State<CategoryProducts> {
               // 3
               return ProductCard(
                   id: _productList[index].id,
-                  image: _productList[index].thumbnail_image,
-                  name: _productList[index].name,
-                  main_price: _productList[index].main_price,
-                  stroked_price: _productList[index].stroked_price,
-                  discount: _productList[index].discount,
+                  image: _productList[index].thumbnail_image.toString(),
+                  name: _productList[index].name.toString(),
+                  main_price: _productList[index].main_price.toString(),
+                  stroked_price: _productList[index].stroked_price.toString(),
+                  discount: _productList[index].discount.toString(),
                   has_discount: _productList[index].has_discount);
             },
           ),
@@ -347,7 +349,7 @@ class _CategoryProductsState extends State<CategoryProducts> {
       );
     } else if (_totalData == 0) {
       return Center(
-          child: Text(AppLocalizations.of(context).common_no_data_available));
+          child: Text(AppLocalizations.of(context).common_no_data_available??''));
     } else {
       return Container(); // should never be happening
     }

@@ -62,7 +62,7 @@ class _QRViewExampleState extends State<QRViewExample> {
           leading: const Icon(
             FontAwesomeIcons.bars,
             color: Colors.white,
-            size: 18,
+            size: 18,  
           ),
           actions: const [
             Padding(

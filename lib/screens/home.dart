@@ -777,7 +777,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           child: GestureDetector(
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return CategoryWiseScreen();
+                return CategoryProducts();
               }));
             },
             child: Container(
@@ -819,7 +819,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           child: GestureDetector(
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return CategoryWiseScreen();
+                return CategoryProducts();
               }));
             },
             child: Container(
@@ -864,7 +864,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       child: GestureDetector(
         onTap: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return CategoryWiseScreen();
+            return CategoryProducts();
           }));
         },
         child: Container(
@@ -934,7 +934,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       child: GestureDetector(
         onTap: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return CategoryWiseScreen();
+            return CategoryProducts();
           }));
         },
         child: Container(
@@ -1020,7 +1020,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       child: GestureDetector(
         onTap: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return CategoryWiseScreen();
+            return CategoryProducts();
           }));
         },
         child: Container(
@@ -1106,7 +1106,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       child: GestureDetector(
         onTap: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return CategoryWiseScreen();
+            return CategoryProducts();
           }));
         },
         child: Container(
@@ -1324,7 +1324,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           child: GestureDetector(
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return CategoryWiseScreen();
+                return CategoryProducts();
 
                 // CategoryList(
                 //   is_top_category: true,
@@ -1370,7 +1370,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           child: GestureDetector(
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return CategoryWiseScreen();
+                return CategoryProducts();
 
                 // Filter(
                 //   selected_filter: "brands",
